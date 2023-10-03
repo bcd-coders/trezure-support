@@ -1,0 +1,476 @@
+{
+	"info": {
+		"_postman_id": "507c9426-c9f1-4685-824b-63a122e21449",
+		"name": "NBA collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28332638"
+	},
+	"item": [
+		{
+			"name": "GamesInProgress",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a string representation of boolean value\r",
+							"pm.test(\"Response is a string representation of boolean\", function() {\r",
+							"    pm.expect(pm.response.text()).to.be.oneOf([\"true\", \"false\"]);\r",
+							"});\r",
+							"\r",
+							"// Test if the response string represents a valid boolean value\r",
+							"pm.test(\"Response string represents a valid boolean value\", function() {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.satisfy(function(value) {\r",
+							"        return value === \"true\" || value === \"false\";\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Convert the response string to an actual boolean and test its value\r",
+							"pm.test(\"Response boolean value is correct\", function() {\r",
+							"    const responseText = pm.response.text();\r",
+							"    const responseBoolean = JSON.parse(responseText.toLowerCase());\r",
+							"    pm.expect(responseBoolean).to.be.oneOf([true, false]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/scores/json/AreAnyGamesInProgress",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"scores",
+						"json",
+						"AreAnyGamesInProgress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PlayersActive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test if the response has a 200 OK status\r",
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of players\r",
+							"pm.test(\"Response contains an array of players\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    pm.expect(players).to.be.an('array');\r",
+							"    pm.expect(players).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each player object in the response\r",
+							"pm.test(\"Player objects have the correct properties\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    players.forEach(function(player) {\r",
+							"        pm.expect(player).to.have.property('PlayerID');\r",
+							"        pm.expect(player).to.have.property('SportsDataID');\r",
+							"        pm.expect(player).to.have.property('Status');\r",
+							"        pm.expect(player).to.have.property('TeamID');\r",
+							"        pm.expect(player).to.have.property('Team');\r",
+							"        pm.expect(player).to.have.property('Jersey');\r",
+							"        pm.expect(player).to.have.property('PositionCategory');\r",
+							"        pm.expect(player).to.have.property('Position');\r",
+							"        pm.expect(player).to.have.property('FirstName');\r",
+							"        pm.expect(player).to.have.property('LastName');\r",
+							"        pm.expect(player).to.have.property('BirthDate');\r",
+							"        pm.expect(player).to.have.property('BirthCity');\r",
+							"        pm.expect(player).to.have.property('BirthState');\r",
+							"        pm.expect(player).to.have.property('BirthCountry');\r",
+							"        pm.expect(player).to.have.property('GlobalTeamID');\r",
+							"        pm.expect(player).to.have.property('Height');\r",
+							"        pm.expect(player).to.have.property('Weight');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/scores/json/PlayersActiveBasic",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"scores",
+						"json",
+						"PlayersActiveBasic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teams(ALL)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of teams\r",
+							"pm.test(\"Response contains an array of teams\", function() {\r",
+							"    const teams = pm.response.json();\r",
+							"    pm.expect(teams).to.be.an('array');\r",
+							"    pm.expect(teams).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each team object in the response\r",
+							"pm.test(\"Team objects have the correct properties\", function() {\r",
+							"    const teams = pm.response.json();\r",
+							"    teams.forEach(function(team) {\r",
+							"        pm.expect(team).to.have.property('TeamID');\r",
+							"        pm.expect(team).to.have.property('Key');\r",
+							"        pm.expect(team).to.have.property('Active');\r",
+							"        pm.expect(team).to.have.property('City');\r",
+							"        pm.expect(team).to.have.property('Name');\r",
+							"        pm.expect(team).to.have.property('LeagueID');\r",
+							"        pm.expect(team).to.have.property('StadiumID');\r",
+							"        pm.expect(team).to.have.property('Conference');\r",
+							"        pm.expect(team).to.have.property('Division');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/scores/json/AllTeams",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"scores",
+						"json",
+						"AllTeams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of referees\r",
+							"pm.test(\"Response contains an array of referees\", function() {\r",
+							"    const referees = pm.response.json();\r",
+							"    pm.expect(referees).to.be.an('array');\r",
+							"    pm.expect(referees).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each referee object in the response\r",
+							"pm.test(\"Referee objects have the correct properties\", function() {\r",
+							"    const referees = pm.response.json();\r",
+							"    referees.forEach(function(referee) {\r",
+							"        pm.expect(referee).to.have.property('RefereeID');\r",
+							"        pm.expect(referee).to.have.property('Name');\r",
+							"        pm.expect(referee).to.have.property('Number');\r",
+							"        pm.expect(referee).to.have.property('Position');\r",
+							"        pm.expect(referee).to.have.property('College');\r",
+							"        pm.expect(referee).to.have.property('Experience');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Test values of specific referee objects\r",
+							"pm.test(\"Referee objects have correct values\", function() {\r",
+							"    const referees = pm.response.json();\r",
+							"    // Test values of the first referee object\r",
+							"    pm.expect(referees[0].RefereeID).to.eql(20000001);\r",
+							"    pm.expect(referees[0].Name).to.eql(\"Nick Buchert\");\r",
+							"    pm.expect(referees[0].Number).to.eql(3);\r",
+							"    pm.expect(referees[0].Position).to.be.null;\r",
+							"    pm.expect(referees[0].College).to.eql(\"Phoenix\");\r",
+							"    pm.expect(referees[0].Experience).to.eql(11);\r",
+							"\r",
+							"    // Test values of the second referee object\r",
+							"    pm.expect(referees[1].RefereeID).to.eql(20000002);\r",
+							"    pm.expect(referees[1].Name).to.eql(\"Sean Wright\");\r",
+							"    pm.expect(referees[1].Number).to.eql(4);\r",
+							"    pm.expect(referees[1].Position).to.be.null;\r",
+							"    pm.expect(referees[1].College).to.eql(\"Mobile\");\r",
+							"    pm.expect(referees[1].Experience).to.eql(16);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/scores/json/Referees",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"scores",
+						"json",
+						"Referees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PlayerDetailsByFreeAgent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of players\r",
+							"pm.test(\"Response contains an array of players\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    pm.expect(players).to.be.an('array');\r",
+							"    pm.expect(players).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each player object in the response\r",
+							"pm.test(\"Player objects have the correct properties\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    players.forEach(function(player) {\r",
+							"        pm.expect(player).to.have.property('PlayerID');\r",
+							"        pm.expect(player).to.have.property('SportsDataID');\r",
+							"        pm.expect(player).to.have.property('Status');\r",
+							"        pm.expect(player).to.have.property('TeamID');\r",
+							"        pm.expect(player).to.have.property('Team');\r",
+							"        pm.expect(player).to.have.property('Jersey');\r",
+							"        pm.expect(player).to.have.property('PositionCategory');\r",
+							"        pm.expect(player).to.have.property('Position');\r",
+							"        pm.expect(player).to.have.property('FirstName');\r",
+							"        pm.expect(player).to.have.property('LastName');\r",
+							"        pm.expect(player).to.have.property('Height');\r",
+							"        pm.expect(player).to.have.property('Weight');\r",
+							"        pm.expect(player).to.have.property('BirthDate');\r",
+							"        pm.expect(player).to.have.property('BirthCity');\r",
+							"        pm.expect(player).to.have.property('BirthState');\r",
+							"        pm.expect(player).to.have.property('BirthCountry');\r",
+							"        pm.expect(player).to.have.property('HighSchool');\r",
+							"        pm.expect(player).to.have.property('College');\r",
+							"        pm.expect(player).to.have.property('Salary');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/scores/json/FreeAgents",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"scores",
+						"json",
+						"FreeAgents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InjuredPlayers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of players\r",
+							"pm.test(\"Response contains an array of players\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    pm.expect(players).to.be.an('array');\r",
+							"    pm.expect(players).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each player object in the response\r",
+							"pm.test(\"Player objects have the correct properties\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    players.forEach(function(player) {\r",
+							"        pm.expect(player).to.have.property('PlayerID');\r",
+							"        pm.expect(player).to.have.property('SportsDataID');\r",
+							"        pm.expect(player).to.have.property('Status');\r",
+							"        pm.expect(player).to.have.property('TeamID');\r",
+							"        pm.expect(player).to.have.property('Team');\r",
+							"        pm.expect(player).to.have.property('Jersey');\r",
+							"        pm.expect(player).to.have.property('PositionCategory');\r",
+							"        pm.expect(player).to.have.property('Position');\r",
+							"        pm.expect(player).to.have.property('FirstName');\r",
+							"        pm.expect(player).to.have.property('LastName');\r",
+							"        pm.expect(player).to.have.property('Height');\r",
+							"        pm.expect(player).to.have.property('Weight');\r",
+							"        pm.expect(player).to.have.property('BirthDate');\r",
+							"        pm.expect(player).to.have.property('BirthCity');\r",
+							"        pm.expect(player).to.have.property('BirthState');\r",
+							"        pm.expect(player).to.have.property('BirthCountry');\r",
+							"        pm.expect(player).to.have.property('HighSchool');\r",
+							"        pm.expect(player).to.have.property('College');\r",
+							"        pm.expect(player).to.have.property('Salary');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/projections/json/InjuredPlayers?",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"projections",
+						"json",
+						"InjuredPlayers"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
