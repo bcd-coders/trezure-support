@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "5286202a-8aa2-47e3-854f-35b4abae2613",
+		"name": "NBA Projections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28872126"
+	},
+	"item": [
+		{
+			"name": "Player stats per Season",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2023",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"stats",
+						"json",
+						"PlayerSeasonStats",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Player stats per Date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/2023-10-30",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"stats",
+						"json",
+						"PlayerGameStatsByDate",
+						"2023-10-30"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
