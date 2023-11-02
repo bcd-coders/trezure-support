@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "507c9426-c9f1-4685-824b-63a122e21449",
+		"_postman_id": "7b519aae-ff76-4c0b-8296-d098e55b59f9",
 		"name": "NBA collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28332638"
+		"_exporter_id": "28872126"
 	},
 	"item": [
 		{
@@ -467,6 +467,253 @@
 							"key": "",
 							"value": null
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Projected Player Season Stats by Team Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of players\r",
+							"pm.test(\"Response contains an array of players\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    pm.expect(players).to.be.an('array');\r",
+							"    pm.expect(players).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each player object in the response\r",
+							"pm.test(\"Player objects have the correct properties\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    players.forEach(function(player) {\r",
+							"        pm.expect(player).to.have.property('PlayerID');\r",
+							"        pm.expect(player).to.have.property('SportsDataID');\r",
+							"        pm.expect(player).to.have.property('Status');\r",
+							"        pm.expect(player).to.have.property('TeamID');\r",
+							"        pm.expect(player).to.have.property('Team');\r",
+							"        pm.expect(player).to.have.property('Jersey');\r",
+							"        pm.expect(player).to.have.property('PositionCategory');\r",
+							"        pm.expect(player).to.have.property('Position');\r",
+							"        pm.expect(player).to.have.property('FirstName');\r",
+							"        pm.expect(player).to.have.property('LastName');\r",
+							"        pm.expect(player).to.have.property('Height');\r",
+							"        pm.expect(player).to.have.property('Weight');\r",
+							"        pm.expect(player).to.have.property('BirthDate');\r",
+							"        pm.expect(player).to.have.property('BirthCity');\r",
+							"        pm.expect(player).to.have.property('BirthState');\r",
+							"        pm.expect(player).to.have.property('BirthCountry');\r",
+							"        pm.expect(player).to.have.property('HighSchool');\r",
+							"        pm.expect(player).to.have.property('College');\r",
+							"        pm.expect(player).to.have.property('Salary');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/projections/json/PlayerSeasonProjectionStatsByTeam/2023/CLE",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"projections",
+						"json",
+						"PlayerSeasonProjectionStatsByTeam",
+						"2023",
+						"CLE"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Projected Player Season Stats Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of players\r",
+							"pm.test(\"Response contains an array of players\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    pm.expect(players).to.be.an('array');\r",
+							"    pm.expect(players).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each player object in the response\r",
+							"pm.test(\"Player objects have the correct properties\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    players.forEach(function(player) {\r",
+							"        pm.expect(player).to.have.property('PlayerID');\r",
+							"        pm.expect(player).to.have.property('SportsDataID');\r",
+							"        pm.expect(player).to.have.property('Status');\r",
+							"        pm.expect(player).to.have.property('TeamID');\r",
+							"        pm.expect(player).to.have.property('Team');\r",
+							"        pm.expect(player).to.have.property('Jersey');\r",
+							"        pm.expect(player).to.have.property('PositionCategory');\r",
+							"        pm.expect(player).to.have.property('Position');\r",
+							"        pm.expect(player).to.have.property('FirstName');\r",
+							"        pm.expect(player).to.have.property('LastName');\r",
+							"        pm.expect(player).to.have.property('Height');\r",
+							"        pm.expect(player).to.have.property('Weight');\r",
+							"        pm.expect(player).to.have.property('BirthDate');\r",
+							"        pm.expect(player).to.have.property('BirthCity');\r",
+							"        pm.expect(player).to.have.property('BirthState');\r",
+							"        pm.expect(player).to.have.property('BirthCountry');\r",
+							"        pm.expect(player).to.have.property('HighSchool');\r",
+							"        pm.expect(player).to.have.property('College');\r",
+							"        pm.expect(player).to.have.property('Salary');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/projections/json/PlayerSeasonProjectionStats/2023",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"projections",
+						"json",
+						"PlayerSeasonProjectionStats",
+						"2023"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Projected Player Game Stats by Date Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if the response is a valid JSON\r",
+							"pm.test(\"Response is valid JSON\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test if the response contains an array of players\r",
+							"pm.test(\"Response contains an array of players\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    pm.expect(players).to.be.an('array');\r",
+							"    pm.expect(players).to.have.length.above(0);\r",
+							"});\r",
+							"\r",
+							"// Test properties of each player object in the response\r",
+							"pm.test(\"Player objects have the correct properties\", function() {\r",
+							"    const players = pm.response.json();\r",
+							"    players.forEach(function(player) {\r",
+							"        pm.expect(player).to.have.property('PlayerID');\r",
+							"        pm.expect(player).to.have.property('SportsDataID');\r",
+							"        pm.expect(player).to.have.property('Status');\r",
+							"        pm.expect(player).to.have.property('TeamID');\r",
+							"        pm.expect(player).to.have.property('Team');\r",
+							"        pm.expect(player).to.have.property('Jersey');\r",
+							"        pm.expect(player).to.have.property('PositionCategory');\r",
+							"        pm.expect(player).to.have.property('Position');\r",
+							"        pm.expect(player).to.have.property('FirstName');\r",
+							"        pm.expect(player).to.have.property('LastName');\r",
+							"        pm.expect(player).to.have.property('Height');\r",
+							"        pm.expect(player).to.have.property('Weight');\r",
+							"        pm.expect(player).to.have.property('BirthDate');\r",
+							"        pm.expect(player).to.have.property('BirthCity');\r",
+							"        pm.expect(player).to.have.property('BirthState');\r",
+							"        pm.expect(player).to.have.property('BirthCountry');\r",
+							"        pm.expect(player).to.have.property('HighSchool');\r",
+							"        pm.expect(player).to.have.property('College');\r",
+							"        pm.expect(player).to.have.property('Salary');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "4897a5a133b544f2ab5344da381890bb",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.sportsdata.io/v3/nba/projections/json/PlayerGameProjectionStatsByDate/2023-11-01",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sportsdata",
+						"io"
+					],
+					"path": [
+						"v3",
+						"nba",
+						"projections",
+						"json",
+						"PlayerGameProjectionStatsByDate",
+						"2023-11-01"
 					]
 				}
 			},
